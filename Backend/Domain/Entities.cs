@@ -2,7 +2,6 @@
 
 public class Box
 {
-
     public int Id { get; set; }
     public string Contents { get; set; }
     public double Width { get; set; }

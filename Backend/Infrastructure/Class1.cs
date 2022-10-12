@@ -1,5 +1,5 @@
 ﻿namespace Infrastructure;
 
-public class Box
+public class Db
 {
 }
