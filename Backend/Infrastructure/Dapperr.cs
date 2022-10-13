@@ -11,7 +11,7 @@ public class Dapperr : IDapperr
     
     private IDbConnection GetConnection()
     {
-        return new SqliteConnection("Data Source=Infrastructure/Infrastructure/db.db");
+        return new SqliteConnection("Data Source=Infrastructure/db.db");
     }
 
     
