@@ -5,7 +5,7 @@ namespace Infrastructure;
 
 public class BoxRepository : IBoxRepository
 {
-    public IEnumerable<Box> All(int page, int maxRecords)
+    public IEnumerable<Box> All()
     {
         throw new NotImplementedException();
     }
@@ -15,9 +15,9 @@ public class BoxRepository : IBoxRepository
         throw new NotImplementedException();
     }
 
-    public void Delete(long id)
+    public Box Delete(long id)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //Return deleted box
     }
 
     public IEnumerable<Box> SearchByName(string tName)

@@ -1,4 +1,7 @@
+using Application.DTOs;
 using Application.Interfaces;
+using AutoMapper;
+using Domain;
 using FluentValidation;
 using Infrastructure;
 using Infrastructure.Interfaces;
@@ -22,19 +25,11 @@ builder.Services.AddScoped<IBoxRepository, BoxRepository>();
 
 
 
-/*
- *
 var mapper = new MapperConfiguration(configuration =>
 {
-    configuration.CreateMap<PostProductDTO, Product>();
+    configuration.CreateMap<PostBoxDTO, Box>();
 }).CreateMapper();
 builder.Services.AddSingleton(mapper);
-
-builder.Services.AddDbContext<ProductDbContext>(options => options.UseSqlite(
-    "Data source=db.db"
-    ));
-
- */
 
 
 

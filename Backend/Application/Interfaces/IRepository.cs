@@ -4,9 +4,9 @@ namespace Application.Interfaces;
 
 public interface IRepository<T>
 {
-    IEnumerable<T> All(int page, int maxRecords);
+    IEnumerable<T> All();
     T Create(T t);
-    void Delete(long id);
+    T Delete(long id);
     IEnumerable<T> SearchByName(string tName);
     T Single(long id);
     T Update(long id, T model);
