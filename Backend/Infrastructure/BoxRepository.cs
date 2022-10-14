@@ -5,6 +5,8 @@ namespace Infrastructure;
 
 public class BoxRepository : IBoxRepository
 {
+    
+    //Use sqlKata to query the database
     public IEnumerable<Box> All()
     {
         throw new NotImplementedException();
