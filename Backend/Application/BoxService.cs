@@ -60,7 +60,7 @@ public class BoxService : IBoxService
         return _boxRepository.Update(id, box);
     }
 
-    public Box DeleteBox(int id)
+    public bool DeleteBox(int id)
     {
         return _boxRepository.Delete(id);
     }

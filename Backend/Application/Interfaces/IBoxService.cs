@@ -10,5 +10,5 @@ public interface IBoxService
     public Box GetBoxById(int id);
     public void RebuildDb();
     public Box UpdateBox(int id, Box box);
-    public Box DeleteBox(int id);
+    public bool DeleteBox(int id);
 }

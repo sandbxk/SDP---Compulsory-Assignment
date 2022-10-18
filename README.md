@@ -42,20 +42,22 @@ background-color: #202020;
 <h2 class="todo"> TODO</h2>
 
 <ul class="todo">
-<li> Finish BoxController </li>
-<li> Finish Dapper/Infrastructure implementation </li>
- <ul class="todo">
-<li> Finish BoxRepository </li>
-<li> Implement DB building </li>
+<li> Test infrastructure </li>
+<li> Test controller and implement status codes </li>
 </ul>
 
-</ul>
+
 
 
 <p></p>
 
 <h2 class="done"> Probably done </h2>
 <ul class="done">
+<li> Finish BoxController </li>
+<li> Finish Dapper/Infrastructure implementation </li>
+ <ul class="done">
+<li> Finish BoxRepository </li>
+<li> Implement DB building </li>
 <li> Implement Automapper </li>
 <li> Implement BoxService </li>
 <li> Implement FluentValidation </li>
