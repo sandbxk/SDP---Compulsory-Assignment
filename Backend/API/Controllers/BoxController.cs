@@ -53,6 +53,14 @@ public class BoxController : ControllerBase
             return NotFound();
         }
     }
+    
+    [HttpGet]
+    [Route("RebuildDB")]
+    public ActionResult RebuildDb()
+    {
+        _boxService.RebuildDb();
+        return Ok();
+    }
 
 
 
