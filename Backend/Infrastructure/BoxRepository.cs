@@ -142,8 +142,20 @@ public class BoxRepository : IBoxRepository
 
     public void BuildDB()
     {
-        var migrate = new Migration_1();
-        migrate.Down();
-        migrate.Up();
+        using var conn = _dbConnectionFactory.CreateConnection();
+
+        var sql = @"
+            DROP TABLE IF EXISTS Boxes;
+
+            CREATE TABLE IF NOT EXISTS Boxes (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                Contents TEXT NOT NULL,
+                Height DOUBLE NOT NULL,
+                Width DOUBLE NOT NULL,
+                BoxDepth DOUBLE NOT NULL,
+                Weight DOUBLE NOT NULL
+            );
+        ";
+        _dapperr.Execute(sql, new DynamicParameters());
     }
 }

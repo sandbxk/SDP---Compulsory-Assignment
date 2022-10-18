@@ -1,19 +1,20 @@
 ﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
 
 namespace Infrastructure.DbBuild;
 
+[Obsolete("Use DbBuild instead")]
 public static class Database
 {
 
+    [Obsolete]
     public static void EnsureDatabase(string name)
     {
         var parameters = new DynamicParameters();
         parameters.Add("name", name);
         using var connection = new DbConnectionFactory().CreateConnection();
         
-        var records = connection.Query("SELECT * FROM sys.databases WHERE name = @name",
+        var records = connection.Query(
+            "SELECT name FROM sqlite_master WHERE name =(@name) AND name not like 'sqlite?_%' escape '?'".Insert(0, name),
             parameters);
         if (!records.Any())
         {
@@ -21,6 +22,7 @@ public static class Database
         }
     }
     
+    [Obsolete]
     public static void RecreateDatabase(string name)
     {
         var parameters = new DynamicParameters();
@@ -36,7 +38,7 @@ public static class Database
         var parameters = new DynamicParameters();
         parameters.Add("name", name);
         using var connection = new DbConnectionFactory().CreateConnection();
-        var records = connection.Query("SELECT * FROM sys.tables WHERE name = @name",
+        var records = connection.Query("SELECT * FROM sqlite_master WHERE name = @name",
             parameters);
 
         return records.Any();

@@ -44,7 +44,12 @@ public class Box
     }
     public double Volume { get; private set; }
     public double Density { get; private set; }
-    
+
+
+    public Box()
+    {
+        
+    }
     
     public Box(int id, string contents, double width, double height, double depth, double weight)
     {

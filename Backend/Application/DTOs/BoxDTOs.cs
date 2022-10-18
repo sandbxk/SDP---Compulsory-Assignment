@@ -8,8 +8,7 @@ public class PostBoxDTO
     public double Height { get; set; }
     public double Depth { get; set; }
     public double Weight { get; set; }
-    public double Volume { get; set; }
-    public double Density { get; set; }
+
 
 }
 

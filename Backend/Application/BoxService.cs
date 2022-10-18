@@ -47,8 +47,9 @@ public class BoxService : IBoxService
 
     public void RebuildDb()
     {
-        throw new NotImplementedException();
+        _boxRepository.BuildDB();
     }
+    
 
     public Box UpdateBox(int id, Box box)
     {

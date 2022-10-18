@@ -1,7 +1,9 @@
 ﻿using FluentMigrator;
+using SqlKata;
 
 namespace Infrastructure.DbBuild;
 
+[Obsolete]
 [Migration(1)]
 public class Migration_1 : Migration
 {
@@ -11,7 +13,7 @@ public class Migration_1 : Migration
     // https://dotnetcorecentral.com/blog/how-to-use-sqlite-with-dapper/
     public override void Up()
     {
-        Database.EnsureDatabase("SDP-Compulsory");
+
         Create.Table("Boxes")
             .WithColumn("Id").AsInt32().PrimaryKey().Identity()
             .WithColumn("Contents").AsString()
@@ -26,6 +28,5 @@ public class Migration_1 : Migration
     {
         if (Database.TableExists("Boxes"))
             Delete.Table("Boxes");
-        Database.RecreateDatabase("SDP-Compulsory");
     }
 }
