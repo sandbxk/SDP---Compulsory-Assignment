@@ -9,18 +9,13 @@ public class Dapperr : IDapperr
 {
     //https://referbruv.com/blog/integrating-dapper-with-aspnet-core-a-comparison-with-ef-core/
     
-    private IDbConnection GetConnection()
-    {
-        return new SqliteConnection("Data Source=Infrastructure/db.db");
-    }
-
     
     public int Execute(string sql, DynamicParameters dp, CommandType commandType = CommandType.Text)
     {
         int result;
 
         // get connection
-        using IDbConnection connection = GetConnection();
+        using IDbConnection connection = new DbConnectionFactory().CreateConnection();
 
         if (connection.State == ConnectionState.Closed)
             connection.Open();
@@ -61,7 +56,7 @@ public class Dapperr : IDapperr
 
     public IEnumerable<T> Query<T>(string sql, DynamicParameters dp, CommandType commandType = CommandType.Text)
     {
-        using IDbConnection db = GetConnection();
+        using IDbConnection db = new DbConnectionFactory().CreateConnection();
 
         if (db.State == ConnectionState.Closed)
             db.Open();

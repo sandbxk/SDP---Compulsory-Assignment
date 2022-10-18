@@ -7,11 +7,12 @@ namespace Infrastructure.DbBuild;
 public static class Database
 {
 
-    public static void EnsureDatabase(string connectionString, string name)
+    public static void EnsureDatabase(string name)
     {
         var parameters = new DynamicParameters();
         parameters.Add("name", name);
-        using var connection = new SqliteConnection(connectionString);
+        using var connection = new DbConnectionFactory().CreateConnection();
+        
         var records = connection.Query("SELECT * FROM sys.databases WHERE name = @name",
             parameters);
         if (!records.Any())
@@ -20,20 +21,21 @@ public static class Database
         }
     }
     
-    public static void RecreateDatabase(string connectionString, string name)
+    public static void RecreateDatabase(string name)
     {
         var parameters = new DynamicParameters();
         parameters.Add("name", name);
-        using var connection = new SqliteConnection(connectionString);
+        using var connection = new DbConnectionFactory().CreateConnection();
+
         connection.Execute($"DROP DATABASE IF EXISTS {name}");
         connection.Execute($"CREATE DATABASE {name}");
     }
     
-    public static bool TableExists(string connectionString, string name)
+    public static bool TableExists(string name)
     {
         var parameters = new DynamicParameters();
         parameters.Add("name", name);
-        using var connection = new SqliteConnection(connectionString);
+        using var connection = new DbConnectionFactory().CreateConnection();
         var records = connection.Query("SELECT * FROM sys.tables WHERE name = @name",
             parameters);
 

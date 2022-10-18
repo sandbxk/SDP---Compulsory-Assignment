@@ -1,7 +1,9 @@
+using System.Reflection;
 using Application.DTOs;
 using Application.Interfaces;
 using AutoMapper;
 using Domain;
+using FluentMigrator.Runner;
 using FluentValidation;
 using Infrastructure;
 using Infrastructure.Interfaces;
@@ -23,7 +25,12 @@ builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssembli
 builder.Services.AddScoped<IDapperr, Dapperr>();
 builder.Services.AddScoped<IBoxRepository, BoxRepository>();
 
-
+builder.Services.AddLogging(c => c.AddFluentMigratorConsole())
+    .AddFluentMigratorCore()
+    .ConfigureRunner(c => c
+        .AddSQLite()
+        .WithGlobalConnectionString(new DbConnectionFactory().ToString())
+        .ScanIn(Assembly.GetExecutingAssembly()).For.All());
 
 var mapper = new MapperConfiguration(configuration =>
 {
