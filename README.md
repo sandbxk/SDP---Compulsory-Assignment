@@ -55,7 +55,6 @@ background-color: #202020;
 <ul class="done">
 <li> Finish BoxController </li>
 <li> Finish Dapper/Infrastructure implementation </li>
- <ul class="done">
 <li> Finish BoxRepository </li>
 <li> Implement DB building </li>
 <li> Implement Automapper </li>
