@@ -42,7 +42,7 @@ public class BoxController : ControllerBase
     }
     
     [HttpPost]
-    public ActionResult<Box> CreateBox([FromBody] PostBoxDTO box)
+    public ActionResult<Box> CreateBox(PostBoxDTO box)
     {
         try
         {
@@ -53,13 +53,14 @@ public class BoxController : ControllerBase
         {
             return BadRequest(v.Message);
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             return StatusCode(500, e.Message);
         }
     }
     
     [HttpPut]
+    [Route("{id}")]
     public ActionResult<Box> UpdateBox([FromRoute] int id, [FromBody] Box box)
     {
         try
@@ -67,7 +68,7 @@ public class BoxController : ControllerBase
             return Ok(_boxService.UpdateBox(id, box));
         } catch (KeyNotFoundException e) 
         {
-            return NotFound("No product found at ID " + id);
+            return NotFound("No box found at ID " + id);
         } catch (Exception e)
         {
             return StatusCode(500, e.ToString());
@@ -88,7 +89,7 @@ public class BoxController : ControllerBase
         } 
         catch (KeyNotFoundException e) 
         {
-            return NotFound("No product found at ID " + id);
+            return NotFound("No box found at ID " + id);
         } 
         catch (Exception e)
         {

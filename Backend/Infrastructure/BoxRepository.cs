@@ -46,17 +46,23 @@ public class BoxRepository : IBoxRepository
             Contents = t.Contents,
             Height = t.Height,
             Width = t.Width,
-            Depth = t.Depth,
+            BoxDepth = t.Depth,
             Weight = t.Weight
         };
         
+        string sql = "INSERT INTO Boxes (Contents, Height, Width, BoxDepth, Weight) " +
+                     "VALUES (@Contents, @Height, @Width, @BoxDepth, @Weight); " +
+                     "SELECT last_insert_rowid();";
         
+        /* Did not work as intended, the compiled sql did seemingly not have the right placeholders.
+         Expected @p1, @p2, @p3, @p4, @p5 but got @Contents, @Height, @Width, @BoxDepth, @Weight. Requires further investigation.
         var compiler = new SqliteCompiler();
         var query = new Query("Boxes").AsInsert(data);
         SqlResult sqlResult = compiler.Compile(query);
-        var sql = sqlResult.Sql += "; SELECT last_insert_rowid();";
+        var compiledSql = sqlResult.Sql += "; SELECT last_insert_rowid();";
+        */
         
-        var result = _dapperr.Query<int>(sqlResult.Sql, new DynamicParameters(data));
+        var result = _dapperr.Query<int>(sql, new DynamicParameters(data));
         t.Id = result.First();
 
         return t;
@@ -99,7 +105,6 @@ public class BoxRepository : IBoxRepository
 
     public Box Single(long id)
     {
-        using var conn = _dbConnectionFactory.CreateConnection();
         var data = new
         {
             Id = id
@@ -115,22 +120,26 @@ public class BoxRepository : IBoxRepository
 
     public Box Update(long id, Box model)
     {
-        using var conn = _dbConnectionFactory.CreateConnection();
+       
         var data = new
         {
             Id = id,
             Contents = model.Contents,
             Height = model.Height,
             Width = model.Width,
-            Depth = model.Depth,
+            BoxDepth = model.Depth,
             Weight = model.Weight
         };
 
+        
+        string sql = "UPDATE Boxes SET Contents = @Contents, Height = @Height, Width = @Width, BoxDepth = @BoxDepth, Weight = @Weight WHERE Id = @Id";
+        /* Did not work as intended, the compiled sql did seemingly not have the right placeholders.
         var compiler = new SqliteCompiler();
         var query = new Query("Boxes").AsUpdate(data).Where("Id", id);
         SqlResult sqlResult = compiler.Compile(query);
+        */
         
-        var result = _dapperr.Execute(sqlResult.Sql, new DynamicParameters(data));
+        var result = _dapperr.Execute(sql, new DynamicParameters(data));
         if (result != 1)
         {
             throw new Exception("Could not update box");
