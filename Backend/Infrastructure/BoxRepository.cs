@@ -46,7 +46,7 @@ public class BoxRepository : IBoxRepository
             Contents = t.Contents,
             Height = t.Height,
             Width = t.Width,
-            BoxDepth = t.Depth,
+            BoxDepth = t.BoxDepth,
             Weight = t.Weight
         };
         
@@ -127,7 +127,7 @@ public class BoxRepository : IBoxRepository
             Contents = model.Contents,
             Height = model.Height,
             Width = model.Width,
-            BoxDepth = model.Depth,
+            BoxDepth = model.BoxDepth,
             Weight = model.Weight
         };
 

@@ -66,10 +66,12 @@ public class BoxController : ControllerBase
         try
         {
             return Ok(_boxService.UpdateBox(id, box));
-        } catch (KeyNotFoundException e) 
+        } 
+        catch (KeyNotFoundException e) 
         {
             return NotFound("No box found at ID " + id);
-        } catch (Exception e)
+        } 
+        catch (Exception e)
         {
             return StatusCode(500, e.ToString());
         }

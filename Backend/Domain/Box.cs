@@ -6,7 +6,8 @@ public class Box
     public string Contents { get; set; }
     public double Width { get; set; }
     public double Height { get; set; }
-    public double Depth { get; set; }
+   
+    public double BoxDepth { get; set; }
     public double Weight { get; set; }
 
 
@@ -16,7 +17,7 @@ public class Box
         
     }
     
-    public Box(int id, string contents, double width, double height, double depth, double weight)
+    public Box(int id, string contents, double width, double height, double boxDepth, double weight)
     {
         Id = id;
 
@@ -26,7 +27,7 @@ public class Box
         
         Width = width;
         Height = height;
-        Depth = depth;
+        this.BoxDepth = boxDepth;
         Weight = weight;
 
       
