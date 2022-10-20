@@ -1,6 +1,7 @@
 using Application.DTOs;
 using Application.Interfaces;
 using Domain;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -26,40 +27,80 @@ public class BoxController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<Box> GetBoxById(int id)
     {
-        return _boxService.GetBoxById(id);
+        try
+        {
+            return _boxService.GetBoxById(id);
+        } 
+        catch (KeyNotFoundException e) 
+        {
+            return NotFound("No box found at ID " + id);
+        } 
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
     }
     
     [HttpPost]
     public ActionResult<Box> CreateBox([FromBody] PostBoxDTO box)
     {
-        return _boxService.CreateNewBox(box);
+        try
+        {
+            var result = _boxService.CreateNewBox(box);
+            return Created("", result);
+        }
+        catch (ValidationException v)
+        {
+            return BadRequest(v.Message);
+        }
+        catch (System.Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
     }
     
     [HttpPut]
-    public ActionResult<Box> UpdateBox([FromBody] Box box)
+    public ActionResult<Box> UpdateBox([FromRoute] int id, [FromBody] Box box)
     {
-        return _boxService.UpdateBox(box.Id, box);
+        try
+        {
+            return Ok(_boxService.UpdateBox(id, box));
+        } catch (KeyNotFoundException e) 
+        {
+            return NotFound("No product found at ID " + id);
+        } catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
     }
     
     [HttpDelete("{id}")]
     public ActionResult<Box> DeleteBox(int id)
     {
-        var successful =_boxService.DeleteBox(id);
-
-        if (successful)
-            return Ok();
-        else
+        try
         {
-            return NotFound();
+            var successful =_boxService.DeleteBox(id);
+
+            if (successful)
+                return Ok(_boxService.DeleteBox(id));
+            else
+                return BadRequest();
+        } 
+        catch (KeyNotFoundException e) 
+        {
+            return NotFound("No product found at ID " + id);
+        } 
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
         }
     }
     
     [HttpGet]
     [Route("RebuildDB")]
-    public ActionResult RebuildDb()
+    public void RebuildDb()
     {
         _boxService.RebuildDb();
-        return Ok();
     }
 
 
