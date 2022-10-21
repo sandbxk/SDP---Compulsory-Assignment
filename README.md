@@ -17,6 +17,7 @@ background-color: #202020;
 }
 </style>
 
+
 <!--Frontend-->
 <h1> Frontend</h1>
 
@@ -41,18 +42,14 @@ background-color: #202020;
 
 <h2 class="todo"> TODO</h2>
 
-<ul class="todo">
-<li> Test infrastructure </li>
-<li> Test controller and implement status codes </li>
-</ul>
-
-
 
 
 <p></p>
 
 <h2 class="done"> Probably done </h2>
 <ul class="done">
+<li> Test infrastructure </li>
+<li> Test controller and implement status codes </li>
 <li> Finish BoxController </li>
 <li> Finish Dapper/Infrastructure implementation </li>
 <li> Finish BoxRepository </li>
