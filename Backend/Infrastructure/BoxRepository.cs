@@ -44,14 +44,14 @@ public class BoxRepository : IBoxRepository
         var data = new
         {
             Contents = t.Contents,
-            Height = t.Height,
-            Width = t.Width,
-            BoxDepth = t.BoxDepth,
+            ZHeight = t.ZHeight,
+            XWidth = t.XWidth,
+            YLength = t.YLength,
             Weight = t.Weight
         };
         
-        string sql = "INSERT INTO Boxes (Contents, Height, Width, BoxDepth, Weight) " +
-                     "VALUES (@Contents, @Height, @Width, @BoxDepth, @Weight); " +
+        string sql = "INSERT INTO Boxes (Contents, ZHeight, XWidth, YLength, Weight) " +
+                     "VALUES (@Contents, @ZHeight, @XWidth, @YLength, @Weight); " +
                      "SELECT last_insert_rowid();";
         
         /* Did not work as intended, the compiled sql did seemingly not have the right placeholders.
@@ -76,11 +76,9 @@ public class BoxRepository : IBoxRepository
             Id = id
         };
         
-        var compiler = new SqliteCompiler();
-        var query = new Query("Boxes").AsDelete().Where("Id", id);
-        SqlResult sqlResult = compiler.Compile(query);
+        string sql = "DELETE FROM Boxes WHERE Id = @Id";
         
-        var result = _dapperr.Execute(sqlResult.Sql, new DynamicParameters(data));
+        var result = _dapperr.Execute(sql, new DynamicParameters(data));
         
         return result > 0;
     }
@@ -94,27 +92,23 @@ public class BoxRepository : IBoxRepository
                 Name = tName
             };
             
-            var compiler = new SqliteCompiler();
-            var query = new Query("Boxes").Select("*").WhereLike("Name", tName);
-            SqlResult sqlResult = compiler.Compile(query);
+            string sql = "SELECT * FROM Boxes WHERE Name LIKE @Name";
             
-            var result = _dapperr.Query<Box>(sqlResult.Sql, new DynamicParameters(data));
+            var result = _dapperr.Query<Box>(sql, new DynamicParameters(data));
             return result;
         }
     }
 
     public Box Single(long id)
     {
+        string sql = "SELECT * FROM Boxes WHERE Id = @Id";
+        
         var data = new
         {
             Id = id
         };
-
-        var compiler = new SqliteCompiler();
-        var query = new Query("Boxes").Select("1").Where("Id", id);
-        SqlResult sqlResult = compiler.Compile(query);
         
-        var result = _dapperr.Query<Box>(sqlResult.Sql, new DynamicParameters(data));
+        var result = _dapperr.Query<Box>(sql, new DynamicParameters(data));
         return result.First();
     }
 
@@ -125,14 +119,14 @@ public class BoxRepository : IBoxRepository
         {
             Id = id,
             Contents = model.Contents,
-            Height = model.Height,
-            Width = model.Width,
-            BoxDepth = model.BoxDepth,
+            ZHeight = model.ZHeight,
+            XWidth = model.XWidth,
+            YLength = model.YLength,
             Weight = model.Weight
         };
 
         
-        string sql = "UPDATE Boxes SET Contents = @Contents, Height = @Height, Width = @Width, BoxDepth = @BoxDepth, Weight = @Weight WHERE Id = @Id";
+        string sql = "UPDATE Boxes SET Contents = @Contents, ZHeight = @ZHeight, XWidth = @XWidth, YLength = @YLength, Weight = @Weight WHERE Id = @Id";
         /* Did not work as intended, the compiled sql did seemingly not have the right placeholders.
         var compiler = new SqliteCompiler();
         var query = new Query("Boxes").AsUpdate(data).Where("Id", id);
@@ -159,9 +153,9 @@ public class BoxRepository : IBoxRepository
             CREATE TABLE IF NOT EXISTS Boxes (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Contents TEXT NOT NULL,
-                Height DOUBLE NOT NULL,
-                Width DOUBLE NOT NULL,
-                BoxDepth DOUBLE NOT NULL,
+                ZHeight DOUBLE NOT NULL,
+                XWidth DOUBLE NOT NULL,
+                YLength DOUBLE NOT NULL,
                 Weight DOUBLE NOT NULL
             );
         ";
