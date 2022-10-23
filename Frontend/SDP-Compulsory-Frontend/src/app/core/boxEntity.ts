@@ -1,4 +1,4 @@
-export class Box {
+export class BoxEntity {
   id: number = -1;
   contents: string = "";
   xWidth: number = 0;
@@ -21,6 +21,16 @@ export class Box {
     this.xWidth = xWidth;
     this.yLength = yLength;
     this.zHeight = zHeight;
+    this.calculateVolume();
+    this.calculateDensity();
+  }
+
+  calculateVolume() {
+    this.volume = this.xWidth * this.yLength * this.zHeight;
+  }
+
+  calculateDensity() {
+    this.density = this.volume / this.zHeight;
   }
 
 }
