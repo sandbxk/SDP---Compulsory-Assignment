@@ -1,27 +1,38 @@
-<h1>Boxes in storage</h1>
+<h1 class="title">Boxes in storage</h1>
 <br>
 
 <div style="margin: 200px;"></div>
-<button onClick="" New box />
+<button mat-button class="newButton" (click)="openNewBoxDialogue()">
+  New box
+</button>
 
 <mat-card *ngFor="let b of boxes">
   <mat-card-header>
     <mat-card-title>Box no. {{b.id}}" </mat-card-title>
-    <mat-card-subtitle>{{b.content}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <input>{{b.content}} <input>
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p></p>
-      <ul>
-        <li Width {{b.xWidth}}>
-        <li Height {{b.yHeight}}>
-        <li Depth {{b.zDepth}}>
-        <li Weight {{b.weight}}>
-        <li Volume {{b.volume}}>
-        <li Density {{b.density}}>
-      </ul>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Box no. {{b.id}}</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <input Width {{b.xWidth}}> <br>
+        <input Height {{b.yHeight}}> <br>
+        <input Depth {{b.zDepth}}> <br>
+        <input Weight {{b.weight}}> <br>
+        <input Volume {{b.volume}}> <br>
+        <input Density {{b.density}}> <br>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-card-content>
   <mat-card-actions>
     <button mat-button>Delete</button>
+    <br>
     <button mat-button>Edit</button>
   </mat-card-actions>
 </mat-card>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {BoxEntity} from "../core/boxEntity";
+import {HttpService} from "../../services/http.service";
+import {catchError} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {NewBoxPopupComponent} from "../newBoxPopup/new-box-popup/new-box-popup.component";
 
 @Component({
   selector: 'app-box',
@@ -8,7 +11,10 @@ import {BoxEntity} from "../core/boxEntity";
 })
 export class BoxComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: HttpService,
+    private dialogue: MatDialog
+    ) { }
 
   id: number = -1;
   contents: string = "";
@@ -23,7 +29,22 @@ export class BoxComponent implements OnInit {
   boxes: any[] = [];
 
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const boxes = await this.http.getBoxes();
+    this.boxes = boxes;
+  }
+
+  openNewBoxDialogue() {
+    this.dialogue.open(NewBoxPopupComponent, {
+      data: {
+        boxes: this.boxes
+      }
+    });
+
+    this.dialogue.afterAllClosed.subscribe(() => {
+      this.ngOnInit();
+      }
+    )
   }
 
 
@@ -36,15 +57,27 @@ export class BoxComponent implements OnInit {
       zHeight: this.zHeight,
       weight: this.weight
     }
+    return dto;
   }
 
 
-  calculateVolume() {
+  private calculateVolume() {
     this.volume = this.xWidth * this.yLength * this.zHeight;
   }
 
-  calculateDensity() {
+  private calculateDensity() {
     this.density = this.volume / this.weight;
+  }
+
+  async createBox() {
+    const dto = await this.createDTO();
+    const box = await this.http.createBox(dto);
+    this.boxes.push(box);
+  }
+
+  async deleteBox(id: number) {
+    await this.http.deleteProduct(id);
+    this.boxes = this.boxes.filter(box => box.id != id);
   }
 
 }
