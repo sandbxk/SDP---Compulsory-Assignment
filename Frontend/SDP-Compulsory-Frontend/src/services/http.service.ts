@@ -5,7 +5,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatButton} from "@angular/material/button";
 
 export const axiosConfig = axios.create({
-  baseURL: 'http://localhost:7069/'
+  baseURL: 'https://localhost:7069/'
 });
 
 @Injectable({
@@ -23,9 +23,10 @@ export class HttpService {
         }
         return response;
       }, rejected => {
-        if(rejected.response.status>=400 && rejected.response.status <500) {
+        if(rejected.response.status >=400 && rejected.response.status <500) {
           matSnackbar.open(rejected.response.data);
-        } else if (rejected.response.status>499) {
+        }
+        else if (rejected.response.status>499) {
           this.matSnackbar.open("Something went wrong")
         }
         catchError(rejected);

@@ -21,7 +21,7 @@ public class BoxController : ControllerBase
     [HttpGet]
     public ActionResult<List<Box>> GetAllBoxes()
     {
-        return _boxService.GetAllBoxes();
+        return Ok(_boxService.GetAllBoxes());
     }
     
     [HttpGet("{id}")]

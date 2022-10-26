@@ -15,6 +15,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { NewBoxPopupComponent } from './newBoxPopup/new-box-popup/new-box-popup.component';
 import { UpdateBoxPopupComponent } from './updateBoxPopup/update-box-popup/update-box-popup.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatButtonModule,
     MatCardModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    FlexLayoutModule
   ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import {catchError} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {NewBoxPopupComponent} from "../newBoxPopup/new-box-popup/new-box-popup.component";
 
+
 @Component({
   selector: 'app-box',
   templateUrl: './box.component.html',
@@ -17,7 +18,7 @@ export class BoxComponent implements OnInit {
     ) { }
 
   id: number = -1;
-  contents: string = "";
+  contents: string = "(Empty box)";
   xWidth: number = 0;
   yLength: number = 0;
   zHeight: number = 0;
