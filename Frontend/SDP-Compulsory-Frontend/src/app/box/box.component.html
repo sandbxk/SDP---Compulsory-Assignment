@@ -1,18 +1,18 @@
-<div>
-  <h1 class="title">Boxes in storage</h1>
-</div>
-<br>
+<app-navbar></app-navbar>
 
 <div style="margin: 200px;"></div>
 <button mat-button class="newButton" (click)="openNewBoxDialogue()">
   New box
 </button>
 
-<div *ngFor="let b of boxes" style="margin-bottom: 100px;">
-  <div style="margin-bottom: 100px;">
-  <mat-card>
+
+<div fxLayout="column" fxLayoutGap="10px">
+  <div *ngFor="let b of boxes">
+  <mat-card class="card">
     <mat-card-header>
-      <mat-card-title>Box no. {{b.id}} </mat-card-title>
+      <mat-card-title>
+        Box no. {{b.id}}
+      </mat-card-title>
       <mat-card-subtitle>
         {{b.contents}}
       </mat-card-subtitle>
@@ -30,11 +30,11 @@
           </label>
           <br>
           <label>
-            Height: {{b.yHeight}} m
+            Height: {{b.zHeight}} m
           </label>
           <br>
           <label>
-            Depth: {{b.zDepth}} m
+            Length: {{b.yLength}} m
           </label>
           <br>
           <label>
@@ -42,18 +42,13 @@
           </label>
           <br>
           <label>
-            Volume: {{b.volume}} m3
+            Volume: {{calculateVolume(b)}} m3
           </label>
-          <br>
-          <label>
-            Density: {{b.density}} kg/m3
-          </label>
-          <br>
         </mat-expansion-panel>
         </mat-accordion>
       </mat-card-content>
       <mat-card-actions>
-        <div>
+        <div style="align-items: center">
           <button mat-button>Delete</button>
           <button mat-button>Edit</button>
         </div>

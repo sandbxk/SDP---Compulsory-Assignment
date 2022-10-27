@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
-import {catchError} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {NewBoxPopupComponent} from "../newBoxPopup/new-box-popup/new-box-popup.component";
 
@@ -20,8 +19,8 @@ export class BoxComponent implements OnInit {
   id: number = -1;
   contents: string = "(Empty box)";
   xWidth: number = 0;
-  yLength: number = 0;
   zHeight: number = 0;
+  yLength: number = 0;
   weight: number = 0;
 
   volume: number = 0;
@@ -31,22 +30,21 @@ export class BoxComponent implements OnInit {
 
 
   async ngOnInit() {
-    const boxes = await this.http.getBoxes();
-    this.boxes = boxes;
+    this.boxes = await this.http.getBoxes();
   }
 
   openNewBoxDialogue() {
-    this.dialogue.open(NewBoxPopupComponent, {
+    let dialogueRef = this.dialogue.open(NewBoxPopupComponent, {
       data: {
         boxes: this.boxes
       }
     });
 
-    this.dialogue.afterAllClosed.subscribe(() => {
+    dialogueRef.afterClosed().subscribe(result => {
+      console.log("Dialogue closed");
       this.ngOnInit();
-      }
-    )
-  }
+      });
+    }
 
 
   async createDTO() {
@@ -54,21 +52,19 @@ export class BoxComponent implements OnInit {
       id: 0,
       contents: this.contents,
       xWidth: this.xWidth,
-      yLength: this.yLength,
       zHeight: this.zHeight,
+      yLength: this.yLength,
       weight: this.weight
     }
     return dto;
   }
 
 
-  private calculateVolume() {
-    this.volume = this.xWidth * this.yLength * this.zHeight;
+  calculateVolume(box: any) : number {
+    let volume = box.xWidth * box.yLength * box.zHeight;
+    return volume;
   }
 
-  private calculateDensity() {
-    this.density = this.volume / this.weight;
-  }
 
   async createBox() {
     const dto = await this.createDTO();

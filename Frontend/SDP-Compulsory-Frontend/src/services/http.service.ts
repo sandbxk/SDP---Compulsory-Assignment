@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import axios from "axios";
 import {catchError} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatButton} from "@angular/material/button";
 
 export const axiosConfig = axios.create({
   baseURL: 'https://localhost:7069/'
@@ -39,7 +38,7 @@ export class HttpService {
     return httpResponse.data;
   }
 
-  async createBox(dto: { contents: string; xWidth: number; yLength: number; zHeight: number; weight: number; }) {
+  async createBox(dto: { contents: string; xWidth: number; zHeight: number; yLength: number; weight: number; }) {
     const httpResult = await axiosConfig.post('box', dto);
     return httpResult.data;
   }
@@ -49,7 +48,7 @@ export class HttpService {
     return httpsResult.data;
   }
 
-  async updateProduct(id: any, dto: {contents: string; xWidth: number; yLength: number; zHeight: number; weight: number; }) {
+  async updateProduct(id: any, dto: {contents: string; xWidth: number; zHeight: number; yLength: number; weight: number; }) {
     const httpsResult = await axiosConfig.put('box/'+id, dto);
     return httpsResult.data;
   }

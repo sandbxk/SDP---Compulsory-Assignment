@@ -16,13 +16,15 @@ import { NewBoxPopupComponent } from './newBoxPopup/new-box-popup/new-box-popup.
 import { UpdateBoxPopupComponent } from './updateBoxPopup/update-box-popup/update-box-popup.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { NavbarComponent } from './navbar/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoxComponent,
     NewBoxPopupComponent,
-    UpdateBoxPopupComponent
+    UpdateBoxPopupComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

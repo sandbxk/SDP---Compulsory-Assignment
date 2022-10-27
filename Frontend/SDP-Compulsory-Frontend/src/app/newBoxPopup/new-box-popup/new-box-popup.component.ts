@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {HttpService} from "../../../services/http.service";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-new-box-popup',
@@ -19,6 +19,7 @@ export class NewBoxPopupComponent implements OnInit {
 
   // https://www.youtube.com/watch?v=FThtv9iorao
   constructor(
+    public dialogRef: MatDialogRef<NewBoxPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data : any,
     private http: HttpService
   )
@@ -48,6 +49,6 @@ export class NewBoxPopupComponent implements OnInit {
   }
 
   close() {
-    this.data.dialogue.close();
+    this.dialogRef.close();
   }
 }
