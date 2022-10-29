@@ -1,31 +1,39 @@
 <h2>Create a new box</h2>
 <br>
 
-<mat-label>Contents</mat-label>
-<div class="mat-form-field-infix">
-  <textarea matInput placeholder="Contents" [(ngModel)]="contents"></textarea>
-</div>
-<br>
-<mat-label>Width</mat-label>
-<div class="mat-form-field-infix">
-  <textarea matInput placeholder="Width" [(ngModel)]="xWidth"></textarea>
-</div>
-<br>
-<mat-label>Height</mat-label>
-<div class="mat-form-field-infix">
-  <textarea matInput placeholder="Height" [(ngModel)]="zHeight"></textarea>
-</div>
-<br>
-<mat-label>Length</mat-label>
-<div class="mat-form-field-infix">
-  <textarea matInput placeholder="Depth" [(ngModel)]="yLength"></textarea>
-</div>
-<br>
-<mat-label>Weight</mat-label>
-<div class="mat-form-field-infix">
-  <textarea matInput placeholder="Weight" [(ngModel)]="weight"></textarea>
-</div>
+<form>
+  <mat-form-field>
+    <mat-label>Contents</mat-label>
+    <input matInput placeholder="Contents" type="string" [(ngModel)]="contents" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Width</mat-label>
+    <input matInput placeholder="Width" type="number" [(ngModel)]="xWidth" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Height</mat-label>
+    <input matInput placeholder="Height" type="number" [(ngModel)]="zHeight" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Length</mat-label>
+    <input matInput placeholder="Length" type="number" [(ngModel)]="yLength" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Weight</mat-label>
+    <input matInput placeholder="Weight" type="number" [(ngModel)]="weight" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+
 <br>
 
+
+<button mat-raised-button color="primary" (click)="close()" style="margin-right: 2rem"> Cancel </button>
 <button mat-raised-button color="primary" (click)="createBox()">Create</button>
-<button mat-raised-button color="primary" (click)="close()">Cancel</button>

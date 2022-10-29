@@ -32,8 +32,9 @@ export class NewBoxPopupComponent implements OnInit {
 
   async createBox() {
     const dto = await this.createDTO();
+    console.log(dto);
     const box = await this.http.createBox(dto);
-    this.boxes.push(box);
+    this.dialogRef.close(box);
   }
 
   async createDTO() {

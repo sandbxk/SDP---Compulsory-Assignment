@@ -39,15 +39,76 @@
   transform: translate(-50%, 0);
 }
 
-.newButton {
-  position: fixed;
-  top: 20%;
-  left: 30%;
-  transform: translate(-50%, 0);
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
-  border-color: blueviolet;
-
+.card:hover {
+  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.5);
 }
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #000;
+}
+
+.mat-accordion {
+  width: 100%;
+}
+
+.mat-expansion-panel {
+  max-width: 100%;
+  border: 2px solid rgba(138, 43, 226, 0%);
+}
+
+.mat-expansion-panel:hover {
+  border: 2px solid rgba(138, 43, 226, 50%);
+}
+
+.mat-expansion-panel.mat-expanded {
+  border: 2px solid rgba(138, 43, 226, 100%);
+}
+
+.mat-expansion-panel-header-title {
+  font-size: 1rem;
+  font-weight: 150;
+  color: #000;
+}
+
+.mat-expansion-panel-header-description {
+  font-size: 1rem;
+  font-weight: 150;
+  color: #000;
+}
+
+
+
+
+.newButton {
+  position: relative;
+  top: 0;
+  left: 50%;
+  font-size: 32px;
+  color: blueviolet;
+  transform: translate(-50%, -100%);
+  text-align: center;
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: 2px solid rgba(138, 43, 226, 50%);
+  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.newButton:hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+
 
 

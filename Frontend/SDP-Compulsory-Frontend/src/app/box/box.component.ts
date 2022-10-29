@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {MatDialog} from "@angular/material/dialog";
 import {NewBoxPopupComponent} from "../newBoxPopup/new-box-popup/new-box-popup.component";
+import {UpdateBoxPopupComponent} from "../updateBoxPopup/update-box-popup/update-box-popup.component";
 
 
 @Component({
@@ -42,9 +43,28 @@ export class BoxComponent implements OnInit {
 
     dialogueRef.afterClosed().subscribe(result => {
       console.log("Dialogue closed");
-      this.ngOnInit();
+      if (result != null) {
+        this.boxes.push(result);
+      }
       });
     }
+
+
+    openEditBoxDialogue(box: any) {
+    let dialogueRef = this.dialogue.open(UpdateBoxPopupComponent, {
+      data: {
+        boxes: this.boxes,
+        box: box
+      }
+    });
+
+    dialogueRef.afterClosed().subscribe(result => {
+      console.log("Dialogue closed");
+      if (result != null) {
+        this.boxes[this.boxes.findIndex(box => box.id == result.id)] = result;
+      }
+    });
+  }
 
 
   async createDTO() {

@@ -2,7 +2,7 @@
 
 <div style="margin: 200px;"></div>
 <button mat-button class="newButton" (click)="openNewBoxDialogue()">
-  New box
+  +
 </button>
 
 
@@ -49,8 +49,8 @@
       </mat-card-content>
       <mat-card-actions>
         <div style="align-items: center">
-          <button mat-button>Delete</button>
-          <button mat-button>Edit</button>
+          <button mat-button (click)="deleteBox(b.id)">Delete</button>
+          <button mat-button (click)="openEditBoxDialogue(b)">Edit </button>
         </div>
       </mat-card-actions>
     </mat-card>

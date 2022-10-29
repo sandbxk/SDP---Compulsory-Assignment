@@ -1,1 +1,39 @@
-<p>update-box-popup works!</p>
+<h2>Editing box no. {{id}}</h2>
+<br>
+
+<form>
+  <mat-form-field>
+    <mat-label>Contents</mat-label>
+    <input matInput placeholder="Contents" type="string" [(ngModel)]="contents" value="{{contents}}" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Width</mat-label>
+    <input matInput placeholder="Width" type="number" [(ngModel)]="xWidth" value="{{xWidth}}" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Height</mat-label>
+    <input matInput placeholder="Height" type="number" [(ngModel)]="zHeight" value="{{zHeight}}" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Length</mat-label>
+    <input matInput placeholder="Length" type="number" [(ngModel)]="yLength" value="{{yLength}}" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+<form>
+  <mat-form-field>
+    <mat-label>Weight</mat-label>
+    <input matInput placeholder="Weight" type="number" [(ngModel)]="weight" value="{{weight}}" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+</form>
+
+<br>
+
+
+<button mat-raised-button color="primary" (click)="close()" style="margin-right: 2rem"> Cancel </button>
+<button mat-raised-button color="primary" (click)="updateBox()">Done</button>
