@@ -1,38 +1,3 @@
-﻿<style>
-.todo {
-color: #ffa9a9;
-margin-left: 40px;
-list-style-type: "𐄂 ";
-}
-
-
-.done {
-list-style-type: "✅";
-color: #c6ffa9;
-margin-left: 40px;
-}
-
-body {
-background-color: #202020;
-}
-</style>
-
-
-<!--Frontend-->
-<h1> Frontend</h1>
-
-<h2 class="todo"> TODO</h2>
-
-<ul class="todo">
-<li> Start </li>
-</ul>
-
-<p></p>
-
-<h2 class="done"> Probably done </h2>
-<ul class="done">
-<li> Not starting </li>
-</ul>
 
 
 
